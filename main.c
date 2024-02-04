@@ -1,49 +1,72 @@
-#include <stdio.h>
-#include "my_mat.h"
+#include<stdio.h>
+#include<math.h>
+#include"my_mat.h"
+#define SIZE 4
 
+int main(){
 
-
-int main() {
-
-int matrix [size][size]={0};
-char type;
-    printf("Enter type function: ");
-    scanf(" %c", &type);
-    if(type=='D'){
-       return 0;
- }
-    while (type!='D')
-    {
-      if (type=='A'){
-          getValueOfMat(matrix);
-          printMatrix(size,size,matrix);
-        }
-        
-else if (type=='B'){
-    int from;
-    int to;
-    printf("chack the path from: ");
-    scanf("%d", &from);
-    printf("chack the path to: ");
-    scanf("%d", &to);
-    printf("there is a path:%d.\n ",(existPath(from,to,matrix)));
-    
-}
-else if (type=='C')
-{
-    int from;
-    int to;
-    printf("chack the path from: ");
-    scanf(" %d", &from);
-    printf("chack the path to: ");
-    scanf(" %d", &to);
-    printf("the shortpath:%d \n",(shortesPath(from,to,matrix)));
-}
-else{
-  printf("invalid input please enter A,B,C,D.\n");
-}
+    char c;
 printf("Enter type function: ");
-  scanf(" %c", &type);
+scanf("%c",&c);
+    while(c!='D'){
+
+        if(c =='A'){
+
+            prog_1();
+             printMatrix();
+        }
+        else if(c =='B'){
+
+            prog_2();
+        }
+        else if(c =='C'){
+            
+            prog_3();
+        }
+printf("Enter type function: ");
+        scanf("%c",&c);
+    }
+
+ char  strings[5] = {};
+for ( int i = 0; i < 5; i++)
+{
+  char c;
+printf("enter the item's names");
+scanf("%c",&c);
+strings[i]=c;
+
 }
-return 0; 
+
+float  values[5] = {};
+for ( int i = 0; i < 5; i++)
+{
+  float c;
+printf("enter the item's values");
+scanf("%f",&c);
+values[i]=c;
+
+}
+float  weights[5] = {};
+for ( int i = 0; i < 5; i++)
+{
+  float c;
+printf("enter the item's weights");
+scanf("%f",&c);
+weights[i]=c;
+
+
+selectItems(weights,values,*strings,5);
+
+
+
+
+
+
+
+
+
+
+
+    return 0;
+
 }
