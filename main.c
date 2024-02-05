@@ -6,14 +6,13 @@
 int main(){
 
     char c;
-printf("Enter type function: ");
 scanf("%c",&c);
     while(c!='D'){
 
         if(c =='A'){
 
             prog_1();
-             printMatrix();
+         //    printMatrix();
         }
         else if(c =='B'){
 
@@ -23,7 +22,6 @@ scanf("%c",&c);
             
             prog_3();
         }
-printf("Enter type function: ");
         scanf("%c",&c);
     }
 
