@@ -59,20 +59,12 @@ void prog_1(){
 for (int i = 0; i < SIZE; i++)// the value of the up and down triangel are the same
 {
     for (int j = i; j < SIZE; j++)
-    {
-        if(i==j)// the diogonal is 0
         {
-            mat[i][j]=0;
-        }
-      else{
-        scanf( "%d", &mat[i][j]); 
-      mat[j][i]=mat[i][j];
-      }
+        scanf( "%d", &mat[i][j]);
     }  
     
 }
 minPath();
-
 }
 
 
