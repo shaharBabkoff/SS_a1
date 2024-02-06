@@ -1,7 +1,8 @@
 #include<stdio.h>
-#define SIZE 4
+#define SIZE 10
 #define INFINITY 10000000
-
+#define W 20
+#define maxItems 5
 int mat[SIZE][SIZE];
 
 
@@ -58,12 +59,11 @@ void prog_1(){
 
 for (int i = 0; i < SIZE; i++)// the value of the up and down triangel are the same
 {
-    for (int j = i; j < SIZE; j++)
-        {
-        scanf( "%d", &mat[i][j]);
+    for (int j = 0; j < SIZE; j++)
+    {
+        scanf( "%d", &mat[i][j]); 
+      }
     }  
-    
-}
 minPath();
 }
 
@@ -98,50 +98,32 @@ void prog_3(){
 }
 
 }
-void selectItems(float weights [],float value [],char *string[], int numOfItems ){
-  //  char *finItems[5]={};
- int itemIncluded[6][21]={0}; // To track included items
-int k[6][21];
-//int j=0;
-for (int i=0;i<=numOfItems;i++){
-    for ( int wi = 0; wi <= 20; wi++) {
-       if(i==0||wi==0){
-        k[i][wi]=0;
-       }
-       else if (weights[i-1]<=wi) {
-        int take=value[i-1]+k[i-1][wi-(int) weights[i-1]];
-        int notTake=k[i-1][wi];
-    if (take>notTake){
-    k[i][wi]=take;
-   // finItems[j]=string[i];
-    itemIncluded[i][wi]=1;
-   // j++;
-    }
-else 
-k[i][wi]=notTake;
-       }
-       else {
-        k[i][wi]=k[i-1][wi];
-       }
-    }
-}
- printf("Total value: %d\n", k[numOfItems][20]);
+int Knapsack(int weights[], int values[], int selected_bool[]) {
+    int k[maxItems + 1][W + 1];
 
-    // Backtrack to find included items
-    printf("Selected items: ");
-    int w = 20;
-    for (int i = numOfItems-1; i >0; i--) {
-        // Check if the item was included at this capacity
-        if (itemIncluded[i][w]) {
-            printf("%s, ", string[i - 1]); // Print the name of the included item
-            w -= (int)weights[i - 1]; // Adjust weight
-            if (w <= 0) break; // If no more capacity, stop
+    // Initialize the DP table
+    for (int i = 0; i <= maxItems; i++) {
+        for (int wi = 0; wi <= W; wi++) {
+            if (i == 0 || wi == 0) {
+                k[i][wi] = 0;
+            } else if (weights[i - 1] <= wi) {
+                k[i][wi] = max(values[i - 1] + k[i - 1][wi - weights[i - 1]], k[i - 1][wi]);
+            } else {
+                k[i][wi] = k[i - 1][wi];
+            }
         }
     }
-    printf("\n");
+
+    // Backtrack to find the included items
+    int w = W;
+    for (int i = maxItems; i > 0; i--) {
+        if (k[i][w] != k[i - 1][w]) {
+            selected_bool[i - 1] = 1;  // Item i-1 was included
+            w -= weights[i - 1];
+        }
+    }
+
+    return k[maxItems][W];
 }
-
-
-
 
 
