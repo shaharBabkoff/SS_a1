@@ -29,7 +29,6 @@ int main() {
             printf(" %s", items[i]);
         }
     }
-    //printf("\n");
-
+    
     return 0;
 }
